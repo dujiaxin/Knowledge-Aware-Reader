@@ -1,3 +1,4 @@
+#coding=utf-8
 import json
 import nltk
 import numpy as np
@@ -108,7 +109,7 @@ def load_model(path):
 
 def load_dict(filename):
     word2id = dict()
-    with open(filename) as f_in:
+    with open(filename, encoding="utf-8") as f_in:
         for line in f_in:
             word = line.strip()
             word2id[word] = len(word2id)
@@ -213,5 +214,5 @@ def sparse_bmm(X, Y):
     return prod.view(B, M, K)
 
 if __name__  == "__main__":
-    # load_documents('datasets/wikimovie/full_doc/documents.json')
+    nltk.download('punkt')# load_documents('datasets/wikimovie/full_doc/documents.json')
     char_vocab('datasets/webqsp/kb_05/vocab.txt', 'datasets/webqsp/kb_05/chars.txt')

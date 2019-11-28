@@ -25,8 +25,14 @@ class Packed(nn.Module):
         h, c = h[:, _indices, :], c[:, _indices, :]
         return outputs, (h, c)
 
-def gelu(x):
+def gelu_old(x):
     return x * 0.5 * (1.0 + torch.erf(x / math.sqrt(2.0)))
+
+def gelu(x):
+    """ Implementation of the gelu activation function currently in Google Bert repo (identical to OpenAI GPT).
+        Also see https://arxiv.org/abs/1606.08415
+    """
+    return 0.5 * x * (1 + torch.tanh(math.sqrt(2 / math.pi) * (x + 0.044715 * torch.pow(x, 3))))
 
 def l_relu(x, n_slope=0.01):
     return F.leaky_relu(x, n_slope)
